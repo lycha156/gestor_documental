@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENIDO -->
+<div class="card">
+    <div class="card-header header-tematico">
+        <div class="float-start">
+            <h4 class="card-header-title">Tabla</h4>    
+        </div>
+        <div class="float-end">
+            <a href="#" style="margin-top: 4px;" class="btn btn-success"><i class="bi bi-plus-square"></i> Nuevo</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <!-- BUSQUEDA -->
+        <div class="card">
+            <div class="card-body">
+                <form action="#">
+                    <input type="query" class="form-control" placeholder="Buscar">
+                </form>
+            </div>
+        </div>
+
+        <!-- TABLA -->
+        <div class="table-responsive-md">
+            <table class="table table-sm table-hover ">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Descripcion Corta</th>
+                        <th>Fecha Creacion</th>
+                        <th>Creador</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Requerimiento</td>
+                        <td>Compra de Insumos</td>
+                        <td>15/05/2022</td>
+                        <td>Roberto</td>
+                        <td><a href="#"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
+                            <a href="#"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
+                            <a href="#"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
+                    </tr>
+                    <tr>
+                        <td>Requerimiento</td>
+                        <td>Compra de Insumos</td>
+                        <td>15/05/2022</td>
+                        <td>Roberto</td>
+                        <td><a href="#"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
+                            <a href="#"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
+                            <a href="#"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
+                    </tr>
+                    <tr>
+                        <td>Requerimiento</td>
+                        <td>Compra de Insumos</td>
+                        <td>15/05/2022</td>
+                        <td>Roberto</td>
+                        <td><a href="#"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
+                            <a href="#"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
+                            <a href="#"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
