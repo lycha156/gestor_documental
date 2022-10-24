@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        <!-- CONTENIDO -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Dependencia</h5>
+
+                
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='map'></box-icon></span>
+                                {{form.nombre}}
+                                <span class="error invalid-feedback">{{form.nombre.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='select-multiple'></box-icon></span>
+                                {{form.tipo}}
+                                <span class="error invalid-feedback">{{form.tipo.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='map-alt'></box-icon></span>
+                                {{form.direccion}}
+                                <span class="error invalid-feedback">{{form.direccion.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='phone'></box-icon></span>
+                                {{form.telefono}}
+                                <span class="error invalid-feedback">{{form.telefono.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='phone'></box-icon></span>
+                                {{form.interno}}
+                                <span class="error invalid-feedback">{{form.interno.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='user-circle'></box-icon></span>
+                                {{form.encargado}}
+                                <span class="error invalid-feedback">{{form.encargado.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='envelope' ></box-icon></span>
+                                {{form.email}}
+                                <span class="error invalid-feedback">{{form.email.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text"><box-icon name='text'></box-icon></span>
+                        {{form.observaciones}}
+                    </div>
+
+                
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success float-end"><i class="bi bi-plus-square"></i> Guardar</button>
+                <a href="{% url 'dependencias_index' %}" class="btn btn-danger"><i class="bi bi-x-square"></i> Cancelar</a>
+            </div>
+        </div>
+
+    </form>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $('#select2-tipo').select2({
+            theme: 'bootstrap-5'
+        });
+    });
+</script>
+{% endblock scripts %}

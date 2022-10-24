@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENIDO -->
+<div class="card">
+    <div class="card-header">
+        Perfil de Requerimiento
+        <a class="btn btn-sm btn-primary float-end" href="{% url 'dependencias_update' dependencia.id %}"><i class="bi bi-pencil"></i> Editar</a>
+        <a class="btn btn-sm btn-warning float-end" style="margin-right: 15px;" href="#"><i class="bi bi-clock-history"></i> Historial</a>
+    </div>
+    <div class="card-body">
+
+        <div class="row data-row">
+            <div class="col-md-4 col-sm-12">
+                <h5 class="align-middle">Dependencia</h5>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <p>{{dependencia.nombre}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Tipo de Dependencia</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.tipo}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Direccion</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.direccion}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Telefono</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.telefono}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>interno</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.interno}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Email</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.email}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Encargado</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.encargado}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Observaciones</h5>
+            </div>
+            <div class="col">
+                <p>{{dependencia.observaciones}}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

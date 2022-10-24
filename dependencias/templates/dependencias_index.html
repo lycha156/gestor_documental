@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENIDO -->
+<div class="card">
+    <div class="card-header header-tematico">
+        <div class="float-start">
+            <h4 class="card-header-title">Dependencias</h4>    
+        </div>
+        <div class="float-end">
+            <a href="{% url 'dependencias_create' %}" style="margin-top: 4px;" class="btn btn-success"><i class="bi bi-plus-square"></i> Nuevo</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <!-- BUSQUEDA -->
+        <div class="card">
+            <div class="card-body">
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <input name="query" class="form-control" placeholder="Buscar" autofocus="autofocus">
+                </form>
+            </div>
+        </div>
+
+        <!-- TABLA -->
+        <div class="table-responsive-md">
+            <table class="table table-sm table-hover ">
+                <thead>
+                    <tr>
+                        <th>Dependencia</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Tipo de Dependencia</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dependencia in dependencias %}
+                    <tr>
+                        <td>{{dependencia.nombre|lower|capfirst }}</td>
+                        <td>{{dependencia.direccion|lower|capfirst }}</td>
+                        <td>{{dependencia.telefono|lower|capfirst }}</td>
+                        <td>{{dependencia.tipo}}</td>
+                        <td><a href="{% url 'dependencias_show' dependencia.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="32" height="32"></a>
+                            <a href="{% url 'dependencias_update' dependencia.id %}"><img src="{% static 'assets/iconos/edit.png' %}" width="32" height="32"></a>
+                            <a href="#"><img src="{% static 'assets/iconos/delete.png' %}" width="32" height="32"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

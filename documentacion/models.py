@@ -1,3 +1,4 @@
+from turtle import textinput
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.forms import CharField
@@ -22,7 +23,7 @@ class Documento(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.RESTRICT, related_name="usuario_documento")
     estado = models.ForeignKey(Estado, on_delete=models.RESTRICT, related_name="estado_documento")
     fecha = models.DateField("Fecha", auto_now=False, auto_now_add=False)
-    codigo = models.IntegerField("Codigo")
+    codigo = models.CharField("Codigo", max_length= 50)
     grupo = models.ForeignKey(Grupo, on_delete=models.RESTRICT, related_name="grupo_documento")
     descripcion = models.TextField("Descripcion")
     inicidor = models.ForeignKey(Dependencia, on_delete=models.RESTRICT, related_name="iniciador_documento")
