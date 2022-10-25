@@ -67,5 +67,18 @@ def show(request, id=id):
     return render(request, 'dependencias_show.html', context)
 
 def delete(request, id=id):
-    pass
+    dependencia = get_object_or_404(Dependencia, pk=id)
+    if request.method == 'POST':
+        try:
+            dependencia.delete()
+            messages.warning(request, "La dependencia fue eliminada con exito.")
+            return redirect('dependencias_index')
+        except Exception as e:
+            messages.warning(request, f"No es posible eliminar la dependencia. Error: {e}")
+            return redirect("dependencias_index")
+    
+    context = {
+        'dependencia': dependencia
+    }
+    return render(request, 'dependencias_delete.html', context)
 

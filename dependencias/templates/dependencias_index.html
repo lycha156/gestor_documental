@@ -46,7 +46,7 @@
                         <td>{{dependencia.tipo}}</td>
                         <td><a href="{% url 'dependencias_show' dependencia.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="32" height="32"></a>
                             <a href="{% url 'dependencias_update' dependencia.id %}"><img src="{% static 'assets/iconos/edit.png' %}" width="32" height="32"></a>
-                            <a href="#"><img src="{% static 'assets/iconos/delete.png' %}" width="32" height="32"></a></td>
+                            <a href="{% url 'dependencias_delete' dependencia.id %}"><img src="{% static 'assets/iconos/delete.png' %}" width="32" height="32"></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
