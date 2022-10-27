@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENIDO -->
+<div class="card">
+    <div class="card-header header-tematico">
+        <div class="float-start">
+            <h4 class="card-header-title">Grupos</h4>    
+        </div>
+        <div class="float-end">
+            <a href="{% url 'grupos_create' %}" style="margin-top: 4px;" class="btn btn-success"><i class="bi bi-plus-square"></i> Nuevo</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <!-- BUSQUEDA -->
+        <div class="card">
+            <div class="card-body">
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <input name="query" class="form-control" placeholder="Buscar" autofocus="autofocus">
+                </form>
+            </div>
+        </div>
+
+        <!-- TABLA -->
+        <div class="table-responsive-md">
+            <table class="table table-sm table-hover ">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grupo in grupos %}
+                    <tr>
+                        <td>{{grupo.grupo|lower|capfirst }}</td>
+                        {% comment %} <td><a href="{% url 'grupos_show' grupo.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="32" height="32"></a> {% endcomment %}
+                            <td><a href="{% url 'grupos_update' grupo.id %}"><img src="{% static 'assets/iconos/edit.png' %}" width="32" height="32"></a>
+                            <a href="{% url 'grupos_delete' grupo.id %}"><img src="{% static 'assets/iconos/delete.png' %}" width="32" height="32"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

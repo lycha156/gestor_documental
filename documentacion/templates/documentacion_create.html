@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <form action="#" enctype="multipart/form-data" method="post" {% if validated %}class="was-validated"{% else %}class="needs-validation"{% endif %}>
+        {% csrf_token %}
+        <!-- CONTENIDO -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Documentacion</h5>
+
+                
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='map'></box-icon></span>
+                                {{form.fecha}}
+                                <span class="error invalid-feedback">{{form.fecha.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='select-multiple'></box-icon></span>
+                                {{form.codigo}}
+                                <span class="error invalid-feedback">{{form.codigo.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='map-alt'></box-icon></span>
+                                {{form.grupo}}
+                                <span class="error invalid-feedback">{{form.grupo.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='phone'></box-icon></span>
+                                {{form.estado}}
+                                <span class="error invalid-feedback">{{form.estado.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='phone'></box-icon></span>
+                                {{form.iniciador}}
+                                <span class="invalid-feedback">{{form.iniciador.errors}}</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='user-circle'></box-icon></span>
+                                {{form.destino}}
+                                <span class="invalid-feedback">{{form.destino.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><box-icon name='phone'></box-icon></span>
+                                {{form.documento}}
+                                <span class="invalid-feedback">{{form.documento.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><box-icon name='text'></box-icon></span>
+                        {{form.descripcion}}
+                        <span class="invalid-feedback">{{form.destino.errors}}</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><box-icon name='text'></box-icon></span>
+                        {{form.observaciones}}
+                        <span class="invalid-feedback">{{form.observaciones.errors}}</span>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><box-icon name='text'></box-icon></span>
+                        {{form.tags}}
+                        <span class="invalid-feedback">{{form.tags.errors}}</span>
+                    </div>
+
+                
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success float-end"><i class="bi bi-plus-square"></i> Guardar</button>
+                <a href="{% url 'dependencias_index' %}" class="btn btn-danger"><i class="bi bi-x-square"></i> Cancelar</a>
+            </div>
+        </div>
+
+    </form>
+{% endblock content %}
+
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $('#select2-grupo').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#select2-iniciador').select2({
+            theme: 'bootstrap-5'
+        });
+
+        $('#select2-destino').select2({
+            theme: 'bootstrap-5'
+        });
+    });
+</script>
+{% endblock scripts %}
