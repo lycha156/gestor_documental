@@ -30,7 +30,7 @@ def craete(request):
                 return redirect('dependencias_index')
             else:
                 messages.warning(request, 'Error al realizar la carga de los datos')
-                return render(request, 'dependencias_create.html', context = {'form': form})
+                return render(request, 'dependencias_create.html', context = {'form': form, 'validated': True})
 
         except Exception as e:
             messages.warning(request, f'Error al realizar la carga de datos. {e}')
@@ -44,14 +44,19 @@ def update(request, id=id):
     obj = get_object_or_404(Dependencia, pk=id)
     form = DependenciaForm(request.POST or None, instance=obj)
 
-    if form.is_valid():
-        try:
-            form.save()
-            messages.success(request, "Datos actulizados en forma correcta.")
-            return redirect('dependencias_index')
-        except Exception as e:
-            messages.warning(request, f'Error al actualizar los datos. {e}')
-            return redirect('dependencias_index')
+    if request.method == 'POST':
+
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, "Datos actulizados en forma correcta.")
+                return redirect('dependencias_index')
+            except Exception as e:
+                messages.warning(request, f'Error al actualizar los datos. {e}')
+                return redirect('dependencias_index')
+        else:
+            messages.warning(request, 'Error al realizar la carga de los datos')
+            return render(request, 'dependencias_create.html', context = {'form': form, 'validated': True})
     
     context = {
         'form': form

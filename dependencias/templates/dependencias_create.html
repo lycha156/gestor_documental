@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <form action="#" method="post">
+    <form action="#" method="post" {% if validated %}class="was-validated"{% else %}class="needs-validation"{% endif %}>
         {% csrf_token %}
         <!-- CONTENIDO -->
         <div class="card">
@@ -51,14 +51,14 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><box-icon name='phone'></box-icon></span>
                                 {{form.interno}}
-                                <span class="error invalid-feedback">{{form.interno.errors}}</span>
+                                <span class="invalid-feedback">{{form.interno.errors}}</span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><box-icon name='user-circle'></box-icon></span>
                                 {{form.encargado}}
-                                <span class="error invalid-feedback">{{form.encargado.errors}}</span>
+                                <span class="invalid-feedback">{{form.encargado.errors}}</span>
                             </div>
                         </div>
                     </div>

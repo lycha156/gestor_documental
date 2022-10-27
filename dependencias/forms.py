@@ -19,7 +19,7 @@ class DependenciaForm(forms.ModelForm):
     nombre = forms.CharField( widget=forms.TextInput(attrs={'class':'form-control', 'autofocus': 'autofocus', 'placeholder': 'Dependencia'}))
     direccion = forms.CharField(required=False, widget=forms.TextInput(attrs = {'class': 'form-control', 'placeholder': 'Direccion'}))
     telefono = forms.CharField(required=False, widget=forms.TextInput(attrs = {'class': 'form-control', 'placeholder': 'Telefono'}))
-    interno = forms.IntegerField(required=False, widget=forms.TextInput(attrs = {'class': 'form-control', 'placeholder': 'Interno', 'type': 'numeric'}))
+    interno = forms.IntegerField(required=False, widget=forms.NumberInput(attrs = {'class': 'form-control', 'placeholder': 'Interno'}))
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control', 'type': 'email', 'placeholder': 'Email'}))
     encargado = forms.CharField(required=False, widget=forms.TextInput(attrs = {'class': 'form-control', 'placeholder': 'Encargado'}))
     observaciones = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 110px;', 'placeholder': 'Observaciones'}))
