@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header header-tematico">
         <div class="float-start">
-            <h4 class="card-header-title">Tabla</h4>    
+            <h4 class="card-header-title">Documentacion</h4>    
         </div>
         <div class="float-end">
             <a href="{% url 'documentacion_create' %}" style="margin-top: 4px;" class="btn btn-success"><i class="bi bi-plus-square"></i> Nuevo</a>
@@ -18,8 +18,9 @@
         <!-- BUSQUEDA -->
         <div class="card">
             <div class="card-body">
-                <form action="#">
-                    <input type="query" class="form-control" placeholder="Buscar">
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <input name="query" class="form-control" placeholder="Buscar" autofocus="autofocus">
                 </form>
             </div>
         </div>
@@ -37,33 +38,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for documento in documentos %}
                     <tr>
-                        <td>Requerimiento</td>
-                        <td>Compra de Insumos</td>
-                        <td>15/05/2022</td>
-                        <td>Roberto</td>
-                        <td><a href="#"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
-                            <a href="#"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
-                            <a href="#"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
+                        <td>{{documento.grupo}}</td>
+                        <td>{{documento.descripcion|truncatewords:8}}</td>
+                        <td>{{documento.fecha}}</td>
+                        <td>{{documento.usuario}}</td>
+                        <td><a href="{% url 'documentacion_show' documento.id %}"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
+                            <a href="{% url 'documentacion_update' documento.id %}"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
+                            <a href="{% url 'documentacion_delete' documento.id %}"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
                     </tr>
-                    <tr>
-                        <td>Requerimiento</td>
-                        <td>Compra de Insumos</td>
-                        <td>15/05/2022</td>
-                        <td>Roberto</td>
-                        <td><a href="#"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
-                            <a href="#"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
-                            <a href="#"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
-                    </tr>
-                    <tr>
-                        <td>Requerimiento</td>
-                        <td>Compra de Insumos</td>
-                        <td>15/05/2022</td>
-                        <td>Roberto</td>
-                        <td><a href="#"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
-                            <a href="#"><img src="static/assets/iconos/edit.png" width="32" height="32"></a>
-                            <a href="#"><img src="static/assets/iconos/delete.png" width="32" height="32"></a></td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

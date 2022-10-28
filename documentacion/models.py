@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from django.forms import CharField
 from django.contrib.auth.models import User
@@ -34,3 +35,9 @@ class Documento(models.Model):
     def __str__(self):
         return self.descripcion
     
+class DocumentoRelacion(models.Model):
+    documento = models.ForeignKey(Documento, on_delete=models.RESTRICT, related_name="documento_relacion")
+    padre = models.ForeignKey(Documento, on_delete=models.RESTRICT, related_name="padre_relacion")
+
+    def __str__(self):
+        return f"{self.documento} => {self.padre}"

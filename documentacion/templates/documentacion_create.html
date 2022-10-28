@@ -10,7 +10,7 @@
             <div class="card-body">
                 <h5 class="card-title">Documentacion</h5>
 
-                
+                    <input type="hidden" name="padre" value="{{padre}}">
 
                     <div class="row">
                         <div class="col">
@@ -96,7 +96,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success float-end"><i class="bi bi-plus-square"></i> Guardar</button>
-                <a href="{% url 'dependencias_index' %}" class="btn btn-danger"><i class="bi bi-x-square"></i> Cancelar</a>
+                <a href="{% url 'documentacion_index' %}" class="btn btn-danger"><i class="bi bi-x-square"></i> Cancelar</a>
             </div>
         </div>
 

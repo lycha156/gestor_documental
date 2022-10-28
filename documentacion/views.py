@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Grupo, Documento
+from .models import Grupo, Documento, DocumentoRelacion
 from django.contrib import messages
 from django.db.models import Q
 from .forms import GrupoForm, DocumentoForm
@@ -7,45 +7,109 @@ from django.contrib.auth.decorators import login_required
 
 # DOCUMENTACION
 def index(request):
-    return render(request, 'documentacion_index.html')
+    if request.method == 'POST':
+        query = request.POST['query']
+        documentos = Documento.objects.filter( Q(estado__estado__icontains = query) | Q(fecha__icontains = query) | Q(codigo__icontains = query) | Q(grupo__grupo__icontains = query) | Q(iniciador__nombre__icontains = query) | Q(destino__nombre__icontains = query) | Q(tags__icontains = query) )[:50]
+    else:
+        documentos = Documento.objects.all()[:50]
+
+    context = {
+        'documentos': documentos
+    }
+    return render(request, 'documentacion_index.html', context)
 
 
 @login_required
-def create(request):
+def create(request, id=None):
     form = DocumentoForm()
     if request.method == 'POST':
         form = DocumentoForm(request.POST, request.FILES)
 
         try:
             if form.is_valid():
-                print(request.POST.items())
                 instancia = form.save(commit=False)
                 instancia.usuario = request.user
                 form.save()
+
+                # RELACION DOCUMENTO
+                if request.POST['padre'] is not None:
+                    padre = Documento.objects.get(id=request.POST['padre'])
+                    documento = Documento.objects.get(id=instancia.id)
+                    relacion = DocumentoRelacion(documento=documento, padre=padre)
+                    relacion.save()
+
                 messages.success(request, "Datos guardados en forma correcta.")
                 return redirect('documentacion_index')
             else:
                 messages.warning(request, 'Error al realizar la carga de los datos')
-                return render(request, 'documentacion_create.html', context = {'form': form, 'validated': True})
+                return render(request, 'documentacion_create.html', context = {'form': form, 'validated': True, 'padre': id})
 
         except Exception as e:
             messages.warning(request, f'Error al realizar la carga de datos. {e}')
             return redirect('documentacion_index')
 
-    context = {'form': form}
+    context = {
+        'form': form,
+        'padre': id
+    }
+    
     return render(request, 'documentacion_create.html', context)
 
 
-def update(request):
-    pass
+@login_required
+def update(request, id=id):
+    obj = get_object_or_404(Documento, pk=id)
+    form = DocumentoForm(request.POST or None, request.FILES or None, instance=obj)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, "Datos actulizados en forma correcta.")
+                return redirect('documentacion_index')
+            except Exception as e:
+                messages.warning(request, f'Error al actualizar los datos. {e}')
+                return redirect('documentacion_index')
+        else:
+            messages.warning(request, 'Error al realizar la carga de los datos')
+            return render(request, 'documentacion_create.html', context = {'form': form, 'validated': True})
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'documentacion_create.html', context)
 
 
-def show(request):
-    pass
+def show(request, id=id):
+    documento = get_object_or_404(Documento, pk=id)
+    relacionados = DocumentoRelacion.objects.filter(padre = documento)
+    padres = DocumentoRelacion.objects.filter(documento = documento)
+
+    context = {
+        'documento': documento,
+        'relacionados': relacionados,
+        'padres': padres
+    }
+    return render(request, 'documentacion_show.html', context)
 
 
-def delete(request):
-    pass
+def delete(request, id=id):
+    documento = get_object_or_404(Documento, pk=id)
+    if request.method == 'POST':
+        try:
+            documento.delete()
+            messages.warning(request, "El Documento fue eliminado con exito.")
+            return redirect('documentacion_index')
+        except Exception as e:
+            messages.warning(request, f"No es posible eliminar el documento. Error: {e}")
+            return redirect("documentacion_index")
+    
+    context = {
+        'documento': documento
+    }
+    return render(request, 'documentacion_delete.html', context)
+
 
 # GRUPOS
 def grupo_index(request):

@@ -1,6 +1,7 @@
+from dataclasses import fields
 from django import forms
 from django.forms import CharField, ClearableFileInput, FileField 
-from .models import Documento, Estado, Grupo
+from .models import Documento, Estado, Grupo, DocumentoRelacion
 from dependencias.models import TipoDependencia, Dependencia
 
 class EstadoForm(forms.ModelForm):
@@ -43,3 +44,15 @@ class DocumentoForm(forms.ModelForm):
     observaciones = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 110px;', 'placeholder': 'Observaciones'}))
     tags = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'style': 'height: 110px;', 'placeholder': 'TAGS'}))
     documento = FileField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
+
+
+class RelacionForm(forms.ModelForm):
+    class Meta:
+        model = DocumentoRelacion
+        fields = [
+            'documento',
+            'padre'
+        ]
+
+    documento = forms.ModelChoiceField(Documento.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-select', 'id': 'select2-documento'}))
+    padre = forms.ModelChoiceField(Documento.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-select', 'id': 'select2-padre'}))

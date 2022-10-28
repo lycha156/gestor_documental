@@ -5,6 +5,7 @@ urlpatterns = [
     # docuementacion
     path('', views.index, name="documentacion_index"),
     path('create/', views.create, name="documentacion_create"),
+    path('create/<int:id>', views.create, name="documentacion_create_relacion"),
     path('update/<int:id>', views.update, name="documentacion_update"),
     path('show/<int:id>', views.show, name="documentacion_show"),
     path('delete/<int:id>', views.delete, name="documentacion_delete"),
