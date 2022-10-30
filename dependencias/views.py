@@ -4,7 +4,10 @@ from .models import TipoDependencia, Dependencia
 from .forms import DependenciaForm
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from historial.models import Historial
 
+@login_required
 def index(request):
     if request.method == 'POST':
         query = request.POST['query']
@@ -18,6 +21,7 @@ def index(request):
     return render(request, 'dependencias_index.html', context)
 
 
+@login_required
 def craete(request):
     form = DependenciaForm()
     if request.method == 'POST':
@@ -25,7 +29,12 @@ def craete(request):
 
         try:
             if form.is_valid():
-                form.save()
+                instancia = form.save()
+
+                # HISTORIAL
+                Historial.objects.create(accion="A", tabla="DEPENDENCIA", descripcion=f"{instancia}", usuario=request.user.username)
+                # HISTORIAL
+
                 messages.success(request, "Datos guardados en forma correcta.")
                 return redirect('dependencias_index')
             else:
@@ -40,6 +49,7 @@ def craete(request):
     return render(request, 'dependencias_create.html', context)
 
 
+@login_required
 def update(request, id=id):
     obj = get_object_or_404(Dependencia, pk=id)
     form = DependenciaForm(request.POST or None, instance=obj)
@@ -48,7 +58,13 @@ def update(request, id=id):
 
         if form.is_valid():
             try:
+                dependencia_original = Dependencia.objects.get(pk=id)
                 form.save()
+
+                # HISTORIAL
+                Historial.objects.create(accion="M", tabla="DEPENDENCIA", descripcion=f'{dependencia_original} ==> {request.POST}', usuario=request.user.username)
+                # HISTORIAL
+
                 messages.success(request, "Datos actulizados en forma correcta.")
                 return redirect('dependencias_index')
             except Exception as e:
@@ -63,6 +79,8 @@ def update(request, id=id):
     }
     return render(request, 'dependencias_create.html', context)
 
+
+@login_required
 def show(request, id=id):
     dependencia = get_object_or_404(Dependencia, pk=id)
 
@@ -71,11 +89,19 @@ def show(request, id=id):
     }
     return render(request, 'dependencias_show.html', context)
 
+
+@login_required
 def delete(request, id=id):
     dependencia = get_object_or_404(Dependencia, pk=id)
     if request.method == 'POST':
         try:
+            exdependencia = Dependencia.objects.get(pk=id)
             dependencia.delete()
+
+            # HISTORIAL
+            Historial.objects.create(accion="B", tabla="DEPENDENCIA", descripcion=f'{exdependencia}', usuario=request.user.username)
+            # HISTORIAL
+
             messages.warning(request, "La dependencia fue eliminada con exito.")
             return redirect('dependencias_index')
         except Exception as e:

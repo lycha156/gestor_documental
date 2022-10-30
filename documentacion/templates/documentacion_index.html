@@ -32,6 +32,7 @@
                     <tr>
                         <th>Grupo</th>
                         <th>Descripcion Corta</th>
+                        <th>Codigo</th>
                         <th>Fecha Creacion</th>
                         <th>Creador</th>
                         <th>Acciones</th>
@@ -41,7 +42,10 @@
                     {% for documento in documentos %}
                     <tr>
                         <td>{{documento.grupo}}</td>
-                        <td>{{documento.descripcion|truncatewords:8}}</td>
+                        <td><button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{{documento.descripcion}}">
+                            Descripcion
+                          </button></td>
+                        <td>{{documento.codigo}}</td>
                         <td>{{documento.fecha}}</td>
                         <td>{{documento.usuario}}</td>
                         <td><a href="{% url 'documentacion_show' documento.id %}"><img src="static/assets/iconos/show.png" width="32" height="32"></a>
@@ -56,3 +60,14 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+          return new bootstrap.Popover(popoverTriggerEl)
+        })
+    });
+</script>
+{% endblock scripts %}

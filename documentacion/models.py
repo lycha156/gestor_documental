@@ -1,4 +1,3 @@
-from statistics import mode
 from django.db import models
 from django.forms import CharField
 from django.contrib.auth.models import User
@@ -34,6 +33,16 @@ class Documento(models.Model):
 
     def __str__(self):
         return self.descripcion
+    
+    # DESCRIPCION CORTA PARA USAR EN HISTORIAL
+    @property
+    def descripcion_corta(self):
+        return f'(ID:{self.id}) D: {self.descripcion} (UID: {self.usuario}, Fecha: {self.fecha}, Codigo: {self.codigo}, Grupo: {self.grupo}, I: {self.iniciador} ==> D: {self.destino} Documento: {self.documento})'
+
+    # DESCRIPCION COMPLETA DEL DOCUMENTO
+    @property
+    def historial(self):
+        return f'Usuario: {self.usuario}, Estado: {self.estado}, Fecha: {self.fecha}, Codigo: {self.codigo}, Grupo: {self.grupo}, Descripcion: {self.descripcion}, Iniciador: {self.iniciador}: Destino: {self.destino}, Observaciones: {self.observaciones}, TAGS: {self.tags}'
     
 class DocumentoRelacion(models.Model):
     documento = models.ForeignKey(Documento, on_delete=models.RESTRICT, related_name="documento_relacion")

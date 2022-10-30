@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% comment %} {% load custom_tags %} {% endcomment %}
+
+{% block content %}
+<!-- Empieza CARD de formulario -->
+<div class="card card-alternativo">
+    <div class="card-header">
+      <div class="row">
+        <div class="col">
+          <h5>HISTORIAL DE ACCIONES</h5>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- tabla -->
+      <table class="table responsive nowrap" id="tabla_principal">
+        <thead>
+            <tr>
+                <th>FECHA</th>
+                <th>USUARIO</th>
+                <th>ACCION</th>
+                <th>TABLA</th>
+                <th>DESCRIPCION</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for historial in historiales %}
+            <tr>
+                <td>{{historial.fecha|date:'d/m/Y - H:i'}} Hs.</td>
+                <td>{{historial.usuario}}</td>
+                <td>{{historial.get_accion_display}}</td>
+                <td>{{historial.tabla}}</td>
+                <td>{{historial.descripcion|truncatechars:50}} ...</td>
+                <td><a href="{% url 'historial_show' historial.id %}" class="imagen" title="Ver"><img width="35px" src="{% static 'assets/iconos/show.png' %}"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <!-- fin tabla -->
+
+    </div>
+
+  </div>
+  <!-- Termina CARD de formulario -->
+{% endblock content %}

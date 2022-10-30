@@ -1,0 +1,60 @@
+{% extends 'base_staff.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+<!-- Empieza CARD de formulario -->
+<div class="card card-alternativo">
+    <div class="card-header">
+      <div class="row">
+        <div class="col">
+          <h5>HISTORIAL DE ACCIONES</h5>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-lg-6 col-xs-12">
+                <strong><i class="bi bi-calendar-date-fill"></i> Fecha y Hora</strong>
+                <p class="text-muted">
+                    {{historial.fecha|date:'l, d F Y - H:i' }} Hs.
+                </p>
+                <hr>
+                <strong><i class="bi bi-lightning-fill"></i> Accion</strong>
+                <p class="text-muted">
+                    {{historial.get_accion_display}}
+                </p>
+                <hr>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+                <strong><i class="bi bi-person-circle"></i> Usuario</strong>
+                <p class="text-muted">
+                    {{historial.usuario}}
+                </p>
+                <hr>
+                <strong><i class="bi bi-table"></i> Tabla</strong>
+                <p class="text-muted">
+                    {{historial.tabla}}
+                </p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <strong><i class="bi bi-file-earmark-text"></i> Descripcion</strong>
+                <p class="text-muted">
+                    {{historial.descripcion}}
+                </p>
+            </div>
+        </div>
+        
+    </div>
+
+  </div>
+  <!-- Termina CARD de formulario -->
+{% endblock content %}
