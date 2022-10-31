@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from historial.models import Historial
 
 # DOCUMENTACION
+@login_required
 def index(request):
     if request.method == 'POST':
         query = request.POST['query']
@@ -131,6 +132,30 @@ def delete(request, id=id):
     }
     return render(request, 'documentacion_delete.html', context)
 
+# RELACIONES
+@login_required
+def relacion_delete(request, id=id):
+    relacion = get_object_or_404(DocumentoRelacion, pk=id)
+    if request.method == 'POST':
+        try:
+            exrelacion = DocumentoRelacion.objects.get(pk=id)
+            relacion.delete()
+
+            # HISTORIAL
+            Historial.objects.create(accion="B", tabla="DOCUMENTO-RELACION", descripcion=f'{exrelacion}', usuario=request.user.username)
+            # HISTORIAL
+
+            messages.success(request, "Relacion entre documentos eliminada con exito.")
+            return redirect('grupos_index')
+        except Exception as e:
+            messages.warning(request, f"No es posible eliminar la relacion entre los documentos. Error: {e}")
+            return redirect("grupos_index")
+    
+    context = {
+        'relacion': relacion
+    }
+    return render(request, 'relaciones_delete.html', context)
+
 
 # GRUPOS
 @login_required
@@ -201,9 +226,11 @@ def grupo_update(request, id=id):
     }
     return render(request, 'grupos_create.html', context)
 
+
 @login_required
 def grupo_show(request, id=id):
     pass
+
 
 @login_required
 def grupo_delete(request, id=id):

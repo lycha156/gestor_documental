@@ -10,6 +10,9 @@ urlpatterns = [
     path('show/<int:id>', views.show, name="documentacion_show"),
     path('delete/<int:id>', views.delete, name="documentacion_delete"),
 
+    # documentos relacionados
+    path("relacion/delete/<int:id>", views.relacion_delete, name="relaciones_delete"),
+    
     # grupos
     path('grupos/', views.grupo_index, name="grupos_index"),
     path('grupos/create', views.grupo_create, name="grupos_create"),

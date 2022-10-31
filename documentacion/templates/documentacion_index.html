@@ -42,9 +42,16 @@
                     {% for documento in documentos %}
                     <tr>
                         <td>{{documento.grupo}}</td>
-                        <td><button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{{documento.descripcion}}">
-                            Descripcion
-                          </button></td>
+                        {% if documento.descripcion %}
+                        <td>
+                            <a style="width: 100%;" class="btn btn-primary btn-sm btn-descripcion" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{{documento.descripcion}}">
+                                {{documento.descripcion|lower|title|truncatewords:4}}
+                            </a>
+                        </td>
+                        {% else %}
+                        <td>Sin Descripcion</td>
+                        {% endif %}
+                        
                         <td>{{documento.codigo}}</td>
                         <td>{{documento.fecha}}</td>
                         <td>{{documento.usuario}}</td>

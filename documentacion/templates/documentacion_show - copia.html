@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- CONTENIDO -->
+<div class="card">
+    <div class="card-header">
+        Perfil de Documento
+        <a class="btn btn-sm btn-primary float-end" href="{% url 'documentacion_update' documento.id %}"><i class="bi bi-pencil"></i> Editar</a>
+        <a class="btn btn-sm btn-warning float-end" style="margin-right: 15px;" href="#"><i class="bi bi-clock-history"></i> Historial</a>
+    </div>
+    <div class="card-body">
+
+        <div class="row data-row">
+            <div class="col-md-4 col-sm-12">
+                <h5 class="align-middle">Usuario</h5>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                {{documento.usuario}}
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Estado</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.estado}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Fecha</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.fecha}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Codigo</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.codigo}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Grupo</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.grupo}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Descripcion</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.descripcion}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Inciador</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.iniciador}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Destino</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.destino}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row" style="padding-bottom: 5px;">
+            <div class="col-4">
+                <h5>Documento</h5>
+            </div>
+            <div class="col">
+                <a style="margin: 5px;" href="{{documento.documento.url}}" target="_blank" rel="noopener noreferrer"><img src="{% static 'assets/iconos/ver.png' %}" width="30" height="30" ></a> 
+                <a style="margin: 5px;" href="{{documento.documento.url}}" rel="noopener noreferrer" download><img src="{% static 'assets/iconos/download.png' %}" width="30" height="30" ></a>
+                {% comment %} <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Requerimiento</td>
+                            <td>PDF</td>
+                            <td>15/06/2022</td>
+                            <td>
+                                <a href="#"><img width="30" height="30" src="static/assets/iconos/ver.png" ></a>
+                                <a href="#"><img width="30" height="30" src="static/assets/iconos/download.png" ></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> {% endcomment %}
+            </div>
+        </div>
+
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Documentos Relacionados</h5>
+            </div>
+            <div class="col">
+
+                <div class="row mb-3">
+                    <div class="col-2">
+                        <a class="btn btn-sm btn-success" href="{% url 'documentacion_create_relacion' documento.id %}"><i class="bi bi-plus-square"></i> Nuevo</a>
+                    </div>
+                    <div class="col-2">
+                        <a class="btn btn-sm btn-primary" href="#"><i class="bi bi-clipboard-plus"></i> Asociar</a>
+                    </div>
+                </div>
+
+                
+                
+                <div class="row">
+                    {% if relacionados %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th>Fecha Carga</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for relacion in relacionados %}
+                            <tr>
+                                <td>{{relacion.documento.grupo}}</td>
+                                <td>{{relacion.documento.codigo}}</td>
+                                <td>{{relacion.documento.fecha}}</td>
+                                <td>
+                                    <a href="{{relacion.documento.documento.url}}" target="_blank"><img width="30" height="30" src="{% static 'assets/iconos/ver.png' %}" ></a>
+                                    <a href="{{relacion.documento.documento.url}}" download><img width="30" height="30" src="{% static 'assets/iconos/download.png' %}" ></a>
+                                    <a href="{% url 'documentacion_show' relacion.documento.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="30" height="30"></a>
+                                    <a href="#"><img width="30" height="30" src="{% static 'assets/iconos/desvincular.png' %}" ></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+
+                    {% else %}
+
+                    <p>No existen documentos relacionados</p>
+
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+
+        {% if padres %}
+                <div class="row data-row">
+            <div class="col-4">
+                <h5>Documentos Relacionados (Padre)</h5>
+            </div>
+            <div class="col">             
+                
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Codigo</th>
+                                <th>Fecha Carga</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for padre in padres %}
+                            <tr>
+                                <td>{{padre.padre.grupo}}</td>
+                                <td>{{padre.padre.codigo}}</td>
+                                <td>{{padre.padre.fecha}}</td>
+                                <td>
+                                    <a href="{{padre.padre.documento.url}}" target="_blank"><img width="30" height="30" src="{% static 'assets/iconos/ver.png' %}" ></a>
+                                    <a href="{{padre.padre.documento.url}}" download><img width="30" height="30" src="{% static 'assets/iconos/download.png' %}" ></a>
+                                    <a href="{% url 'documentacion_show' padre.padre.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="30" height="30"></a>
+                                    {% comment %} <a href="#"><img width="30" height="30" src="{% static 'assets/iconos/desvincular.png' %}" ></a> {% endcomment %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>Observaciones</h5>
+            </div>
+            <div class="col">
+                <p>{{documento.observaciones}}</p>
+            </div>
+        </div>
+
+        <div class="row data-row">
+            <div class="col-4">
+                <h5>TAGS Busqueda</h5>
+            </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <a class="btn btn-sm btn-success" href="#"><i class="bi bi-plus-square"></i> Nuevo TAG</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <p><span class="badge rounded-pill bg-primary">Requerimiento <a href="#"><i class="bi bi-x-circle" style="color: white;"></i></a></span> <span class="badge rounded-pill bg-primary">20-10-2022 <a href="#"><i class="bi bi-x-circle" style="color: white;"></i></a></span> <span class="badge rounded-pill bg-primary">00001545 <a href="#"><i class="bi bi-x-circle" style="color: white;"></i></a></span></p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

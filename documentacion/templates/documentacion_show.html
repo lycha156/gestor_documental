@@ -11,231 +11,226 @@
     </div>
     <div class="card-body">
 
-        <div class="row data-row">
-            <div class="col-md-4 col-sm-12">
-                <h5 class="align-middle">Usuario</h5>
+        <div class="row row-show">
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='user'></box-icon> Usuario</strong>
+                <p class="text-muted">
+                    {{documento.usuario|upper}}
+                </p>
             </div>
-            <div class="col-md-8 col-sm-12">
-                {{documento.usuario}}
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Estado</h5>
-            </div>
-            <div class="col">
-                <p>{{documento.estado}}</p>
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='layer'></box-icon> Estado</strong>
+                <p class="text-muted">
+                    {{documento.estado}}
+                </p>
             </div>
         </div>
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Fecha</h5>
+        <div class="row row-show">
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='calendar'></box-icon> Fecha</strong>
+                <p class="text-muted">
+                    {{documento.fecha}}
+                </p>
             </div>
-            <div class="col">
-                <p>{{documento.fecha}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Codigo</h5>
-            </div>
-            <div class="col">
-                <p>{{documento.codigo}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Grupo</h5>
-            </div>
-            <div class="col">
-                <p>{{documento.grupo}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Descripcion</h5>
-            </div>
-            <div class="col">
-                <p>{{documento.descripcion}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Inciador</h5>
-            </div>
-            <div class="col">
-                <p>{{documento.iniciador}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Destino</h5>
-            </div>
-            <div class="col">
-                <p>{{documento.destino}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row" style="padding-bottom: 5px;">
-            <div class="col-4">
-                <h5>Documento</h5>
-            </div>
-            <div class="col">
-                <a style="margin: 5px;" href="{{documento.documento.url}}" target="_blank" rel="noopener noreferrer"><img src="{% static 'assets/iconos/ver.png' %}" width="30" height="30" ></a> 
-                <a style="margin: 5px;" href="{{documento.documento.url}}" rel="noopener noreferrer" download><img src="{% static 'assets/iconos/download.png' %}" width="30" height="30" ></a>
-                {% comment %} <table class="table">
-                    <tbody>
-                        <tr>
-                            <td>Requerimiento</td>
-                            <td>PDF</td>
-                            <td>15/06/2022</td>
-                            <td>
-                                <a href="#"><img width="30" height="30" src="static/assets/iconos/ver.png" ></a>
-                                <a href="#"><img width="30" height="30" src="static/assets/iconos/download.png" ></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> {% endcomment %}
-            </div>
-        </div>
-
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Documentos Relacionados</h5>
-            </div>
-            <div class="col">
-
-                <div class="row mb-3">
-                    <div class="col-2">
-                        <a class="btn btn-sm btn-success" href="{% url 'documentacion_create_relacion' documento.id %}"><i class="bi bi-plus-square"></i> Nuevo</a>
-                    </div>
-                    <div class="col-2">
-                        <a class="btn btn-sm btn-primary" href="#"><i class="bi bi-clipboard-plus"></i> Asociar</a>
-                    </div>
-                </div>
-
-                
-                
-                <div class="row">
-                    {% if relacionados %}
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Codigo</th>
-                                <th>Fecha Carga</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {% for relacion in relacionados %}
-                            <tr>
-                                <td>{{relacion.documento.grupo}}</td>
-                                <td>{{relacion.documento.codigo}}</td>
-                                <td>{{relacion.documento.fecha}}</td>
-                                <td>
-                                    <a href="{{relacion.documento.documento.url}}" target="_blank"><img width="30" height="30" src="{% static 'assets/iconos/ver.png' %}" ></a>
-                                    <a href="{{relacion.documento.documento.url}}" download><img width="30" height="30" src="{% static 'assets/iconos/download.png' %}" ></a>
-                                    <a href="{% url 'documentacion_show' relacion.documento.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="30" height="30"></a>
-                                    <a href="#"><img width="30" height="30" src="{% static 'assets/iconos/desvincular.png' %}" ></a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            
-                        </tbody>
-                    </table>
-
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='barcode' ></box-icon> Codigo</strong>
+                <p class="text-muted">
+                    {% if documento.codigo %}
+                        {{documento.codigo}}
                     {% else %}
-
-                    <p>No existen documentos relacionados</p>
-
+                        --Sin Codigo--
                     {% endif %}
-                </div>
-                
+                </p>
             </div>
         </div>
 
-        {% if padres %}
-                <div class="row data-row">
-            <div class="col-4">
-                <h5>Documentos Relacionados (Padre)</h5>
+        <div class="row row-show">
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='select-multiple' ></box-icon> Grupo</strong>
+                <p class="text-muted">
+                    {{documento.grupo|upper}}
+                </p>
             </div>
-            <div class="col">             
-                
-                <div class="row">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Codigo</th>
-                                <th>Fecha Carga</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {% for padre in padres %}
-                            <tr>
-                                <td>{{padre.padre.grupo}}</td>
-                                <td>{{padre.padre.codigo}}</td>
-                                <td>{{padre.padre.fecha}}</td>
-                                <td>
-                                    <a href="{{padre.padre.documento.url}}" target="_blank"><img width="30" height="30" src="{% static 'assets/iconos/ver.png' %}" ></a>
-                                    <a href="{{padre.padre.documento.url}}" download><img width="30" height="30" src="{% static 'assets/iconos/download.png' %}" ></a>
-                                    <a href="{% url 'documentacion_show' padre.padre.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="30" height="30"></a>
-                                    {% comment %} <a href="#"><img width="30" height="30" src="{% static 'assets/iconos/desvincular.png' %}" ></a> {% endcomment %}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            
-                        </tbody>
-                    </table>
-                </div>
-                
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='file'></box-icon> Documento</strong>
+                <p class="text-muted">
+                    <a style="margin: 5px;" href="{{documento.documento.url}}" target="_blank" rel="noopener noreferrer"><img src="{% static 'assets/iconos/ver.png' %}" width="30" height="30" ></a> 
+                    <a style="margin: 5px;" href="{{documento.documento.url}}" rel="noopener noreferrer" download><img src="{% static 'assets/iconos/download.png' %}" width="30" height="30" ></a>
+                </p>
             </div>
         </div>
-        {% endif %}
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>Observaciones</h5>
+        <div class="row row-show">
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='location-plus'></box-icon> Iniciador</strong>
+                <p class="text-muted">
+                    {{documento.iniciador|upper}}
+                </p>
             </div>
+            <div class="col-lg-6 col-xs-12">
+                <strong><box-icon name='location-plus'></box-icon> Destino</strong>
+                <p class="text-muted">
+                    {{documento.destino|upper}}
+                </p>
+            </div>
+        </div>
+
+        <div class="row row-show">
             <div class="col">
-                <p>{{documento.observaciones}}</p>
+                <strong><box-icon name='text'></box-icon> Descripcion</strong>
+                <p class="text-muted">
+                    {% if documento.descripcion %}
+                        {{documento.descripcion}}
+                    {% else %}
+                        --Sin Descripcion--
+                    {% endif %}
+                </p>
             </div>
         </div>
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5>TAGS Busqueda</h5>
-            </div>
+        <div class="row row-show">
             <div class="col">
-                <div class="row mb-3">
-                    <div class="col-3">
-                        <a class="btn btn-sm btn-success" href="#"><i class="bi bi-plus-square"></i> Nuevo TAG</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <p><span class="badge rounded-pill bg-primary">Requerimiento <a href="#"><i class="bi bi-x-circle" style="color: white;"></i></a></span> <span class="badge rounded-pill bg-primary">20-10-2022 <a href="#"><i class="bi bi-x-circle" style="color: white;"></i></a></span> <span class="badge rounded-pill bg-primary">00001545 <a href="#"><i class="bi bi-x-circle" style="color: white;"></i></a></span></p>
-                </div>
+                <strong><box-icon name='text'></box-icon> Observaciones</strong>
+                <p class="text-muted">
+                    {% if documentos.observaciones %}
+                        {{documento.observaciones}}
+                    {% else %}
+                        --Sin Observaciones--    
+                    {% endif %}
+                </p>
             </div>
         </div>
 
+        <div class="row row-show">
+            <div class="col">
+                <strong><box-icon name='search-alt-2'></box-icon> TAGS</strong>
+                <p class="text-muted">
+                    {% if documento.tags %}
+                        {{documento.tags}}
+                    {% else %}
+                        -- Sin TAGS --
+                    {% endif %}
+                </p>
+            </div>
+        </div>
 
     </div>
 </div>
+
+<div class="card">
+    <div class="card-header">
+        Documentos Relacionados
+        <a class="btn btn-sm btn-success float-end" href="{% url 'documentacion_create_relacion' documento.id %}"><i class="bi bi-plus-square"></i> Nuevo</a>
+        <a class="btn btn-sm btn-primary float-end" style="margin-right: 15px;" href="#"><i class="bi bi-clipboard-plus"></i> Asociar</a>
+    </div>
+    <div class="card-body">
+        {% if relacionados %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Grupo</th>
+                    <th>Descripcion</th>
+                    <th>Codigo</th>
+                    <th>Fecha Carga</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for relacion in relacionados %}
+                <tr>
+                    <td>{{relacion.documento.grupo}}</td>
+                    {% if relacion.documento.descripcion %}
+                        <td>
+                            <a style="width: 100%;" class="btn btn-primary btn-sm btn-descripcion" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{{documento.descripcion}}">
+                                {{relacion.documento.descripcion|lower|title|truncatewords:4}}
+                            </a>
+                        </td>
+                    {% else %}
+                        <td>Sin Descripcion</td>
+                    {% endif %}
+                    <td>{{relacion.documento.codigo}}</td>
+                    <td>{{relacion.documento.fecha}}</td>
+                    <td>
+                        <a href="{{relacion.documento.documento.url}}" target="_blank"><img width="30" height="30" src="{% static 'assets/iconos/ver.png' %}" ></a>
+                        <a href="{{relacion.documento.documento.url}}" download><img width="30" height="30" src="{% static 'assets/iconos/download.png' %}" ></a>
+                        <a href="{% url 'documentacion_show' relacion.documento.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="30" height="30"></a>
+                        <a href="{% url 'relaciones_delete' relacion.id %}"><img width="30" height="30" src="{% static 'assets/iconos/desvincular.png' %}" ></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+
+        {% else %}
+
+        <p>No existen documentos relacionados</p>
+
+        {% endif %}
+    </div>
+</div>
+
+{% if padres %}
+<div class="card">
+    <div class="card-header">
+        Documentos Relacionados (Padre)
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Descripcion</th>
+                        <th>Codigo</th>
+                        <th>Fecha Carga</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for padre in padres %}
+                    <tr>
+                        <td>{{padre.padre.grupo}}</td>
+                        {% if documento.descripcion %}
+                        <td>
+                            <a style="width: 100%;" class="btn btn-primary btn-sm btn-descripcion" type="button" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{{documento.descripcion}}">
+                                {{documento.descripcion|lower|title|truncatewords:4}}
+                            </a>
+                        </td>
+                        {% else %}
+                        <td>Sin Descripcion</td>
+                        {% endif %}
+                        <td>{{padre.padre.codigo}}</td>
+                        <td>{{padre.padre.fecha}}</td>
+                        <td>
+                            <a href="{{padre.padre.documento.url}}" target="_blank"><img width="30" height="30" src="{% static 'assets/iconos/ver.png' %}" ></a>
+                            <a href="{{padre.padre.documento.url}}" download><img width="30" height="30" src="{% static 'assets/iconos/download.png' %}" ></a>
+                            <a href="{% url 'documentacion_show' padre.padre.id %}"><img src="{% static 'assets/iconos/show.png' %}" width="30" height="30"></a>
+                            {% comment %} <a href="#"><img width="30" height="30" src="{% static 'assets/iconos/desvincular.png' %}" ></a> {% endcomment %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% endblock content %}
 
 {% block scripts %}
-
+<script>
+    $(document).ready(function() {
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+          return new bootstrap.Popover(popoverTriggerEl)
+        })
+    });
+</script>
 {% endblock scripts %}

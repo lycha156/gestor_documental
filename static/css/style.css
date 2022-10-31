@@ -5,6 +5,7 @@
     --table-hover-color: #084298;
 
     --color-tematico-principal: #859aff;
+    --color-tematico-secundario: #5b73e8;
 }
 
 /* FONT */
@@ -184,6 +185,19 @@ th{
     font-size: 18px;
 }
 
+tbody{
+    font-size: 14px;
+}
+
+.btn-descripcion{
+    background-color: var(--color-tematico-principal);
+    border-color: var(--color-tematico-principal);
+}
+
+.btn-descripcion:hover{
+    background-color: var(--color-tematico-secundario);
+    border-color: var(--color-tematico-secundario);
+}
 /* ALERTS */
 
 .alert-image{
@@ -196,6 +210,11 @@ th{
     border-bottom: 2px dotted #737373;
     /* padding: 5px; */
     margin-top: 10px;
+}
+
+.row-show{
+    border-bottom: 1px solid #aeaeae;
+    padding-top: 10px;
 }
 
 /* FORMS */
