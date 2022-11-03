@@ -116,7 +116,8 @@ LANGUAGE_CODE = 'es-AR'
 
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
-USE_I18N = True
+USE_I18N = False
+DATE_FORMAT = "d-m-Y"
 
 USE_TZ = True
 

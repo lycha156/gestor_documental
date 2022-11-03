@@ -68,9 +68,16 @@ html *{
 }
 
 .logo{
-    margin-left: 5px;
     margin-top: 10px;
-    color: white;  
+    color: white;
+    text-align: center;
+}
+
+.sub-logo{
+    color: white;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .login{
@@ -83,6 +90,7 @@ html *{
 .login:hover{
     color: white;
 }
+
 
 
 @media (min-width: 992px){
@@ -213,6 +221,11 @@ tbody{
 }
 
 .row-show{
+    border-bottom: 1px solid #aeaeae;
+    padding-top: 10px;
+}
+
+.col-show{
     border-bottom: 1px solid #aeaeae;
     padding-top: 10px;
 }

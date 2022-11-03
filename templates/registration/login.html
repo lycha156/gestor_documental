@@ -37,6 +37,36 @@
             margin-right: auto;
             margin-top: 15px;
         }
+
+        .logo{
+            margin-left: 0px;
+            color: black;
+        }
+
+        .sub-logo{
+            color: black;
+        }
+
+        .btn-login{
+            border-radius: 0px;
+            background-color: #859aff;
+            border-color: #5b73e8;
+        }
+
+        .btn-login:hover{
+            background-color: #5b73e8;
+            border-color: #5b73e8;
+        }
+
+        .input-group-text{
+            background-color: #859aff;
+            border-color: #5b73e8;
+            color: white;
+        }
+
+        .form-control{
+            border-color: #5b73e8;
+        }
     </style>
 </head>
 <body>
@@ -45,13 +75,16 @@
         <div class="container mt-4">
 
             <div class="row">
-                <div class="col-4"></div>
+                <div class="col-lg-4 col-xs-1"></div>
 
-                <div class="col-4">
+                <div class="col-lg-4 col-xs-10">
                     <div class="card">
                         {% comment %} <img class="foto-login" src="{% static 'assets/logos/rochin.png' %}" width="60" height="60"> {% endcomment %}
                         <div class="card-header">
-                            <h4>INICIAR SESIÓN</h4>
+                            <h4 class="logo"> <strong>BRANCE</strong> </h4>
+                            <p class="sub-logo">Gestor Documental</p>
+                            <hr>
+                            <h5>INICIAR SESIÓN</h5>
                         </div>
                         <div class="card-body">
                             <form method="post" class="form-floating">
@@ -59,7 +92,7 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">@</span>
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Usuario" name="username">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="Usuario" name="username" autofocus required>
                                         <label for="floatingInput">Usuario</label>
                                     </div>
                                     <div class="invalid-feedback">
@@ -71,18 +104,20 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">#</span>
                                     <div class="form-floating">
-                                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
                                         <label for="floatingPassword">Password</label>
                                     </div>
                                 </div>
+
+                                <hr>
                                                                                             
-                                <button class="btn btn-primary" style="display: block; width: 100%;" type="submit">Ingresar</button>
+                                <button class="btn btn-primary btn-login " style="display: block; width: 100%;" type="submit">Ingresar</button>
                             </form> 
                         </div>
                     </div>
                 </div>
 
-                <div class="col-4"></div>
+                <div class="col-lg-4 col-xs-1"></div>
             </div>
 
         </div>

@@ -4,82 +4,80 @@
 {% block content %}
 <!-- CONTENIDO -->
 <div class="card">
-    <div class="card-header">
+    <div class="card-header header-tematico">
         Perfil de Requerimiento
         <a class="btn btn-sm btn-primary float-end" href="{% url 'dependencias_update' dependencia.id %}"><i class="bi bi-pencil"></i> Editar</a>
-        <a class="btn btn-sm btn-warning float-end" style="margin-right: 15px;" href="#"><i class="bi bi-clock-history"></i> Historial</a>
+        {% comment %} <a class="btn btn-sm btn-warning float-end" style="margin-right: 15px;" href="#"><i class="bi bi-clock-history"></i> Historial</a> {% endcomment %}
     </div>
     <div class="card-body">
 
-        <div class="row data-row">
-            <div class="col-md-4 col-sm-12">
-                <h5 class="align-middle"><box-icon name='map'></box-icon> Dependencia</h5>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12 col-show">
+                <strong><box-icon name='map'></box-icon> Dependencia</strong>
+                <p class="text-muted">
+                    {{dependencia.nombre}}
+                </p>
             </div>
-            <div class="col-md-8 col-sm-12">
-                <p>{{dependencia.nombre}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='select-multiple'></box-icon> Tipo de Dependencia</h5>
-            </div>
-            <div class="col">
-                <p>{{dependencia.tipo}}</p>
+            <div class="col-lg-6 col-xs-12 col-show">
+                <strong><box-icon name='select-multiple'></box-icon> Tipo de Dependencia</strong>
+                <p class="text-muted">
+                    {{dependencia.tipo}}
+                </p>
             </div>
         </div>
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='map-alt'></box-icon> Direccion</h5>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12 col-show">
+                <strong><box-icon name='map-alt'></box-icon> Direccion</strong>
+                <p class="text-muted">
+                    {{dependencia.direccion}}
+                </p>
             </div>
-            <div class="col">
-                <p>{{dependencia.direccion}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='phone'></box-icon> Telefono</h5>
-            </div>
-            <div class="col">
-                <p>{{dependencia.telefono}}</p>
+            <div class="col-lg-6 col-xs-12 col-show">
+                <strong><box-icon name='phone'></box-icon> Telefono</strong>
+                <p class="text-muted">
+                    {{dependencia.telefono}}
+                </p>
             </div>
         </div>
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='phone'></box-icon> interno</h5>
+        <div class="row">
+            <div class="col-lg-6 col-xs-12 col-show">
+                <strong><box-icon name='phone'></box-icon> interno</strong>
+                <p class="text-muted">
+                    {{dependencia.interno}}
+                </p>
             </div>
-            <div class="col">
-                <p>{{dependencia.interno}}</p>
-            </div>
-        </div>
-
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='envelope' ></box-icon> Email</h5>
-            </div>
-            <div class="col">
-                <p>{{dependencia.email}}</p>
+            <div class="col-lg-6 col-xs-12 col-show">
+                <strong><box-icon name='envelope' ></box-icon> Email</strong>
+                <p class="text-muted">
+                    {{dependencia.email}}
+                </p>
             </div>
         </div>
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='user-circle'></box-icon> Encargado</h5>
-            </div>
-            <div class="col">
-                <p>{{dependencia.encargado}}</p>
+        <div class="row">
+            <div class="col-lg-12 col-show">
+                <strong><box-icon name='user-circle'></box-icon> Encargado</strong>
+                <p class="text-muted">
+                    {{dependencia.encargado}}
+                </p>
             </div>
         </div>
 
-        <div class="row data-row">
-            <div class="col-4">
-                <h5><box-icon name='text'></box-icon> Observaciones</h5>
-            </div>
-            <div class="col">
-                <p>{{dependencia.observaciones}}</p>
+        <div class="row">
+            <div class="col-lg-12 col-show">
+                <strong><box-icon name='text'></box-icon> Observaciones</strong>
+                <p class="text-muted">
+                    {% if dependencia.observaciones %}
+                        {{dependencia.observaciones}}
+                    {% else %}
+                        <p class="text-muted">
+                            --Sin Observaciones--
+                        </p>
+                    {% endif %}
+                    
+                </p>
             </div>
         </div>
 
