@@ -235,3 +235,9 @@ tbody{
 .error .invalid-feedback{
     display: block;
 }
+
+.input-group-text{
+    background-color: #859aff;
+    border-color: #5b73e8;
+    color: white;
+}
